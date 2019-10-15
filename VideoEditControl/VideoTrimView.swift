@@ -56,6 +56,7 @@ class VideoTrimView: UIView {
         playPinView.layer.shadowColor = UIColor.black.cgColor
         playPinView.layer.shadowRadius = 5
         playPinView.layer.shadowOpacity = 0.3
+        thubnailsView.layer.masksToBounds = true
         
         leftPin.roundCorners(corners: [.topLeft, .bottomLeft], radius: 7)
         rightPin.roundCorners(corners: [.topRight, .bottomRight], radius: 7)
