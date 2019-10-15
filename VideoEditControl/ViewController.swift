@@ -26,20 +26,15 @@ class ViewController: UIViewController {
         let url = Bundle.main.url(forResource: "video", withExtension: "mp4")!
         let asset = AVAsset(url: url)
         
-        let controlView = VideoTrimControl(asset: asset, frame: CGRect(x: 0, y: 200, width: 375, height: 60), valueChanged: { startValue, endValue, currentValue in
-            label.text = "start: \(startValue)\n end: \(endValue)\n current: \(currentValue)"
+        let controlView = VideoTrimView(frame: CGRect(x: 0, y: 150, width: 375, height: 70), asset: asset, valueChanged: { start, end, current in
+            label.text = "start = \(start)\nend = \(end)\ncurrent = \(current)"
         })
         self.view.addSubview(controlView)
         
-        let controlView2 = VideoTrimControl(asset: asset, frame: CGRect(x: 10, y: 300, width: 355, height: 40), valueChanged: { startValue, endValue, currentValue in
-            label.text = "start: \(startValue)\n end: \(endValue)\n current: \(currentValue)"
+        let controlView2 = VideoTrimView(frame: CGRect(x: 0, y: 250, width: 375, height: 170), asset: asset, valueChanged: { start, end, current in
+            label.text = "start = \(start)\nend = \(end)\ncurrent = \(current)"
         })
         self.view.addSubview(controlView2)
-        
-        let controlView3 = VideoTrimControl(asset: asset, frame: CGRect(x: 20, y: 400, width: 275, height: 130), valueChanged: { startValue, endValue, currentValue in
-            label.text = "start: \(startValue)\n end: \(endValue)\n current: \(currentValue)"
-        })
-        self.view.addSubview(controlView3)
     }
 }
 
