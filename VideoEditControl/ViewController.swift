@@ -8,21 +8,21 @@
 
 import UIKit
 import AVFoundation
-import AVKit
 
 class ViewController: UIViewController {
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.setup()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
     }
     
     func setup() {
         let label = UILabel(frame: CGRect(x: 0, y: 40, width: 375, height: 100))
         label.numberOfLines = 3
+        // COMMENT: лишний self.
         self.view.addSubview(label)
         
+        // COMMENT: force-unwrap
         let url = Bundle.main.url(forResource: "video", withExtension: "mp4")!
         let asset = AVAsset(url: url)
         

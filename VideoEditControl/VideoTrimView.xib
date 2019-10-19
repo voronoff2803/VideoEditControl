@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14868"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15400"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -36,7 +36,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.29800286091549294" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="2Uv-Tj-L9Y" secondAttribute="trailing" constant="10" id="46v-Av-5td"/>
                         <constraint firstAttribute="bottom" secondItem="2Uv-Tj-L9Y" secondAttribute="bottom" constant="8" id="KPT-SI-QYE"/>
@@ -53,7 +53,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.29822293133802819" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="PrD-5P-WlD" secondAttribute="bottom" constant="8" id="I6a-qH-X5S"/>
                         <constraint firstItem="PrD-5P-WlD" firstAttribute="leading" secondItem="f6W-1u-0eK" secondAttribute="leading" constant="10" id="JpR-aR-Xpp"/>
@@ -64,14 +64,14 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7a-iz-ckE">
                     <rect key="frame" x="23" y="94" width="483" height="8"/>
-                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="8" id="08I-tu-PIV"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kle-pQ-8yF">
                     <rect key="frame" x="23" y="0.0" width="483" height="8"/>
-                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="8" id="0dA-wU-FhA"/>
                     </constraints>
@@ -85,7 +85,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.29770026404507044" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hk-8P-AXd">
-                    <rect key="frame" x="20" y="0.0" width="10" height="102"/>
+                    <rect key="frame" x="20" y="8" width="10" height="86"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="10" id="eIp-Ht-eVP"/>
@@ -106,8 +106,8 @@
                 <constraint firstAttribute="trailing" secondItem="f6W-1u-0eK" secondAttribute="trailing" id="QXD-Zh-ZMS"/>
                 <constraint firstAttribute="bottom" secondItem="r7a-iz-ckE" secondAttribute="bottom" id="RFF-Al-laq"/>
                 <constraint firstAttribute="trailing" secondItem="2tB-bQ-h0w" secondAttribute="trailing" id="VCU-Y0-61M"/>
-                <constraint firstAttribute="bottom" secondItem="2hk-8P-AXd" secondAttribute="bottom" id="XSe-5r-emo"/>
-                <constraint firstItem="2hk-8P-AXd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bRK-3t-HfM"/>
+                <constraint firstAttribute="bottom" secondItem="2hk-8P-AXd" secondAttribute="bottom" constant="8" id="XSe-5r-emo"/>
+                <constraint firstItem="2hk-8P-AXd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="bRK-3t-HfM"/>
                 <constraint firstItem="BjK-ou-8aw" firstAttribute="leading" secondItem="G3J-Lw-u9v" secondAttribute="trailing" id="cAf-TO-5uG"/>
                 <constraint firstItem="NUH-Y0-2n4" firstAttribute="leading" secondItem="f6W-1u-0eK" secondAttribute="trailing" id="eXr-Zw-UI9"/>
                 <constraint firstItem="G3J-Lw-u9v" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="jVx-jx-PJL"/>

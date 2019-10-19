@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0D0394612353051B005DCD16 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0394602353051B005DCD16 /* AppDelegate.swift */; };
-		0D0394632353051B005DCD16 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0394622353051B005DCD16 /* SceneDelegate.swift */; };
 		0D0394652353051B005DCD16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0394642353051B005DCD16 /* ViewController.swift */; };
 		0D0394682353051B005DCD16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D0394662353051B005DCD16 /* Main.storyboard */; };
 		0D03946A2353051D005DCD16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D0394692353051D005DCD16 /* Assets.xcassets */; };
@@ -22,7 +21,6 @@
 /* Begin PBXFileReference section */
 		0D03945D2353051B005DCD16 /* VideoEditControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoEditControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D0394602353051B005DCD16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0D0394622353051B005DCD16 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0D0394642353051B005DCD16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0D0394672353051B005DCD16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0D0394692353051D005DCD16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -66,7 +64,6 @@
 			children = (
 				0D57A8D32355CB1200611952 /* video.mp4 */,
 				0D0394602353051B005DCD16 /* AppDelegate.swift */,
-				0D0394622353051B005DCD16 /* SceneDelegate.swift */,
 				0D0394642353051B005DCD16 /* ViewController.swift */,
 				0D57A8D12355C75100611952 /* VideoTrimView.swift */,
 				0D14A0C02356157E00BE342E /* UIView+roundCorners.swift */,
@@ -156,7 +153,6 @@
 				0D57A8D22355C75100611952 /* VideoTrimView.swift in Sources */,
 				0D0394612353051B005DCD16 /* AppDelegate.swift in Sources */,
 				0D14A0C12356157E00BE342E /* UIView+roundCorners.swift in Sources */,
-				0D0394632353051B005DCD16 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,7 +297,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M3WBMTG67K;
+				DEVELOPMENT_TEAM = 6CFA54MQCP;
 				INFOPLIST_FILE = VideoEditControl/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -9,7 +9,6 @@
 import UIKit
 import AVFoundation
 
-
 class VideoTrimView: UIView {
     
     @IBOutlet weak var mainView: UIView!
@@ -42,12 +41,14 @@ class VideoTrimView: UIView {
     
     func xibSetup() {
         Bundle.main.loadNibNamed("VideoTrimView", owner: self, options: nil)
+        // COMMENT: force-unwrap
         addSubview(mainView!)
         mainView.frame = self.bounds
         mainView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     override func draw(_ rect: CGRect) {
+        // COMMENT: это не выглядит хорошо, setup не должен выполняться при перерисовке
         setup()
     }
     
@@ -61,6 +62,7 @@ class VideoTrimView: UIView {
         leftPin.roundCorners(corners: [.topLeft, .bottomLeft], radius: 7)
         rightPin.roundCorners(corners: [.topRight, .bottomRight], radius: 7)
         
+        // COMMENT: force-unwrap
         addThubnailViews(in: self.thubnailsView, track: videoAsset.tracks.first!)
         
         let dragRightPinGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(dragRightPin))
@@ -89,6 +91,7 @@ class VideoTrimView: UIView {
         case .began:
             startX = playPinConstraint.constant
         default:
+            // COMMENT: вместо switch такой формы лучше уже использоавть if-else
             if leftConstraint.constant + leftPin.bounds.width > startX + translation.x {
                 playPinConstraint.constant = leftConstraint.constant + leftPin.bounds.width
             } else if tempValue < startX + translation.x {
@@ -147,7 +150,6 @@ class VideoTrimView: UIView {
     }
     
     func addThubnailViews(in thubnailView: UIView, track: AVAssetTrack) {
-        
         let views = createThumbnailViews(in: thubnailView.bounds.size, track: track)
         views.forEach(){ thubnailView.addSubview($0) }
     }
@@ -173,6 +175,7 @@ class VideoTrimView: UIView {
         let count = getCountOfThubnails(in: size, track: track)
         let thubnailSize = getThubnailSize(in: size, track: track)
         
+        // COMMENT: force-unwrap
         let images = getImagesFromAsset(asset: track.asset!, count: count)
         
         var thubnailViews: [UIImageView] = []
@@ -190,6 +193,7 @@ class VideoTrimView: UIView {
     func getImagesFromAsset(asset: AVAsset, count: Int) -> [UIImage] {
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         
+        // COMMENT: force-unwrap
         let trackDuration = asset.tracks.first!.timeRange.duration
         let thubnailDuration = trackDuration.seconds / Double(count)
         var images: [UIImage] = []
