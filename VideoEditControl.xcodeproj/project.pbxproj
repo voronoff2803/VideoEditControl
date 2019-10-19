@@ -62,18 +62,26 @@
 		0D03945F2353051B005DCD16 /* VideoEditControl */ = {
 			isa = PBXGroup;
 			children = (
-				0D57A8D32355CB1200611952 /* video.mp4 */,
 				0D0394602353051B005DCD16 /* AppDelegate.swift */,
 				0D0394642353051B005DCD16 /* ViewController.swift */,
-				0D57A8D12355C75100611952 /* VideoTrimView.swift */,
 				0D14A0C02356157E00BE342E /* UIView+roundCorners.swift */,
-				0D57A8CF2355C4F900611952 /* VideoTrimView.xib */,
+				64B2B149235A919D00670627 /* VideoTrimView */,
 				0D0394662353051B005DCD16 /* Main.storyboard */,
 				0D0394692353051D005DCD16 /* Assets.xcassets */,
 				0D03946B2353051D005DCD16 /* LaunchScreen.storyboard */,
 				0D03946E2353051D005DCD16 /* Info.plist */,
+				0D57A8D32355CB1200611952 /* video.mp4 */,
 			);
 			path = VideoEditControl;
+			sourceTree = "<group>";
+		};
+		64B2B149235A919D00670627 /* VideoTrimView */ = {
+			isa = PBXGroup;
+			children = (
+				0D57A8CF2355C4F900611952 /* VideoTrimView.xib */,
+				0D57A8D12355C75100611952 /* VideoTrimView.swift */,
+			);
+			path = VideoTrimView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
