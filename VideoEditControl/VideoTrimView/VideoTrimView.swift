@@ -107,6 +107,8 @@ class VideoTrimView: UIView {
         let tempValue = mainView.bounds.width - (playPinView.bounds.width + rightConstraint.constant + rightPin.bounds.width)
         if gestureRecognizer.state == .began {
             startX = playPinConstraint.constant
+            userInteracting = true
+            beginInteracting?()
         } else {
             if leftConstraint.constant + leftPin.bounds.width > startX + translation.x {
                 playPinConstraint.constant = leftConstraint.constant + leftPin.bounds.width
@@ -116,16 +118,11 @@ class VideoTrimView: UIView {
                 playPinConstraint.constant = startX + translation.x
             }
         }
-        if gestureRecognizer.state == .ended {
-            countValues()
-            userInteracting = false
-            endInteracting?()
-        }
         
-        if gestureRecognizer.state == .began {
-            countValues()
-            userInteracting = true
-            beginInteracting?()
+        if gestureRecognizer.state == .ended {
+           countValues()
+           userInteracting = false
+           endInteracting?()
         }
     }
     
@@ -135,6 +132,8 @@ class VideoTrimView: UIView {
         let tempValue = mainView.bounds.width - (leftConstraint.constant + rightPin.bounds.width + leftPin.bounds.width + playPinView.bounds.width + minDistance)
         if  gestureRecognizer.state == .began {
             startX = rightConstraint.constant
+            userInteracting = true
+            beginInteracting?()
         } else {
             if startX - translation.x > tempValue {
                 rightConstraint.constant = tempValue
@@ -151,12 +150,6 @@ class VideoTrimView: UIView {
             endInteracting?()
         }
         
-        if gestureRecognizer.state == .began {
-            countValues()
-            userInteracting = true
-            beginInteracting?()
-        }
-        
     }
     
     @objc private func dragLeftPin(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -165,6 +158,8 @@ class VideoTrimView: UIView {
         let tempValue = mainView.bounds.width - (rightConstraint.constant + rightPin.bounds.width + leftPin.bounds.width + playPinView.bounds.width + minDistance)
         if  gestureRecognizer.state == .began {
             startX = leftConstraint.constant
+            userInteracting = true
+            beginInteracting?()
         } else {
             if startX + translation.x > tempValue {
                 leftConstraint.constant = tempValue
@@ -179,12 +174,6 @@ class VideoTrimView: UIView {
             countValues()
             userInteracting = false
             endInteracting?()
-        }
-        
-        if gestureRecognizer.state == .began {
-            countValues()
-            userInteracting = true
-            beginInteracting?()
         }
     }
     
