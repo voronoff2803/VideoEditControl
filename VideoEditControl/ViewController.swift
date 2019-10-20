@@ -35,11 +35,11 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
                 let duration = CMTimeGetSeconds(durationCM), time = CMTimeGetSeconds(time)
                 
                 if time > duration * Float64(self.trimView.endValue) {
-                    self.player?.seek(to: CMTime(seconds: duration * Double(self.trimView.startValue) + 0.25, preferredTimescale: durationCM.timescale))
+                    self.player?.seek(to: CMTime(seconds: duration * Double(self.trimView.startValue), preferredTimescale: durationCM.timescale), toleranceBefore: .zero, toleranceAfter: .zero)
                 }
                 
-                if time < duration * Float64(self.trimView.startValue) {
-                    self.player?.seek(to: CMTime(seconds: duration * Double(self.trimView.startValue), preferredTimescale: durationCM.timescale))
+                if time < duration * Float64(self.trimView.startValue) - 0.1 {
+                    self.player?.seek(to: CMTime(seconds: duration * Double(self.trimView.startValue), preferredTimescale: durationCM.timescale), toleranceBefore: .zero, toleranceAfter: .zero)
                 }
                 
                 let progress = (time / duration)
@@ -66,7 +66,7 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
     func updateValues() {
         label.text = "start = \(trimView.startValue)\n end = \(trimView.endValue)\n currnt = \(trimView.currentValue)"
         guard let duration = player?.currentItem?.duration else { return }
-        self.player?.seek(to: CMTime(seconds: duration.seconds * Double(self.trimView.currentValue) + 0.25, preferredTimescale: duration.timescale))
+        self.player?.seek(to: CMTime(seconds: duration.seconds * Double(self.trimView.currentValue), preferredTimescale: duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero)
     }
 }
 

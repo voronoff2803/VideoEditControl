@@ -24,6 +24,8 @@ class VideoTrimView: UIView {
     var startValue: CGFloat = 0.0
     var endValue: CGFloat = 1.0
     
+    var minimumDurationValue: CGFloat = 0.1
+    
     var videoAsset: AVAsset?
     
     var scrollOnField: Bool = false
@@ -129,13 +131,13 @@ class VideoTrimView: UIView {
     
     @objc private func dragRightPin(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: self)
-        let tempValue = mainView.bounds.width - (leftConstraint.constant + rightPin.bounds.width + leftPin.bounds.width + playPinView.bounds.width)
-        switch gestureRecognizer.state {
-        case .began:
+        let minDistance = thubnailsView.bounds.width * minimumDurationValue
+        let tempValue = mainView.bounds.width - (leftConstraint.constant + rightPin.bounds.width + leftPin.bounds.width + playPinView.bounds.width + minDistance)
+        if  gestureRecognizer.state == .began {
             startX = rightConstraint.constant
-        default:
+        } else {
             if startX - translation.x > tempValue {
-                rightConstraint.constant = mainView.bounds.width - (leftConstraint.constant + rightPin.bounds.width + leftPin.bounds.width + playPinView.bounds.width)
+                rightConstraint.constant = tempValue
             } else if startX - translation.x < 0 {
                 rightConstraint.constant = 0
             } else {
@@ -159,13 +161,13 @@ class VideoTrimView: UIView {
     
     @objc private func dragLeftPin(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: self)
-        let tempValue = mainView.bounds.width - (rightConstraint.constant + rightPin.bounds.width + leftPin.bounds.width + playPinView.bounds.width)
-        switch gestureRecognizer.state {
-        case .began:
+        let minDistance = thubnailsView.bounds.width * minimumDurationValue
+        let tempValue = mainView.bounds.width - (rightConstraint.constant + rightPin.bounds.width + leftPin.bounds.width + playPinView.bounds.width + minDistance)
+        if  gestureRecognizer.state == .began {
             startX = leftConstraint.constant
-        default:
+        } else {
             if startX + translation.x > tempValue {
-                leftConstraint.constant = mainView.bounds.width - (rightConstraint.constant + rightPin.bounds.width + leftPin.bounds.width + playPinView.bounds.width)
+                leftConstraint.constant = tempValue
             } else if startX + translation.x < 0 {
                 leftConstraint.constant = 0
             } else {
