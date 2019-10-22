@@ -30,7 +30,10 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
         let myPlayer = AVPlayer(url: url)
         self.player = myPlayer
         
-        myPlayer.addPeriodicTimeObserver(forInterval: CMTime.init(value: 1, timescale: 60), queue: .main, using: { time in
+        myPlayer.addPeriodicTimeObserver(forInterval: CMTime.init(value: 1, timescale: 60), queue: .main, using: { [weak self] time in
+            guard self?.player.assertingNonNil?.rate != 0 else { return }
+            // ставить в контрол текущую позицию
+            
             if let durationCM = myPlayer.currentItem?.duration {
                 let duration = CMTimeGetSeconds(durationCM), time = CMTimeGetSeconds(time)
                 
@@ -61,6 +64,11 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
         trimView.beginInteracting = {
             self.player?.pause()
         }
+        
+        trimView.currentTimeDidChange = { time in
+            let pos = (self.player?.currentItem?.duration.seconds).assertNonNilOrDefaultValue * time.dbl
+            self.player?.seek(to: CMTime(seconds: pos, preferredTimescale: self.player?.currentItem?.duration.timescale ?? 0), toleranceBefore: .zero, toleranceAfter: .zero)
+        }
     }
     
     func updateValues() {
@@ -70,3 +78,15 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
     }
 }
 
+extension AVPlayer {
+    
+    func seekWithZeroTolerance(to normalizedPosition: Double) {
+        
+    }
+    
+    func seek(to normalizedPosition: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        
+    }
+    
+    var normalizedPosition: Double { currentTime() / d }
+}

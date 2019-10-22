@@ -16,6 +16,9 @@
 		0D57A8D02355C4F900611952 /* VideoTrimView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D57A8CF2355C4F900611952 /* VideoTrimView.xib */; };
 		0D57A8D22355C75100611952 /* VideoTrimView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D57A8D12355C75100611952 /* VideoTrimView.swift */; };
 		0D57A8D42355CB1200611952 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0D57A8D32355CB1200611952 /* video.mp4 */; };
+		64DA2126235F424300934597 /* Blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DA2125235F424300934597 /* Blocks.swift */; };
+		64DA2128235F424F00934597 /* BinaryFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DA2127235F424F00934597 /* BinaryFloatingPoint.swift */; };
+		64DA212A235F425C00934597 /* Optional+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DA2129235F425C00934597 /* Optional+Assert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		0D57A8CF2355C4F900611952 /* VideoTrimView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoTrimView.xib; sourceTree = "<group>"; };
 		0D57A8D12355C75100611952 /* VideoTrimView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTrimView.swift; sourceTree = "<group>"; };
 		0D57A8D32355CB1200611952 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
+		64DA2125235F424300934597 /* Blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blocks.swift; sourceTree = "<group>"; };
+		64DA2127235F424F00934597 /* BinaryFloatingPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryFloatingPoint.swift; sourceTree = "<group>"; };
+		64DA2129235F425C00934597 /* Optional+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Assert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,12 +71,15 @@
 				0D0394602353051B005DCD16 /* AppDelegate.swift */,
 				0D0394642353051B005DCD16 /* ViewController.swift */,
 				0D14A0C02356157E00BE342E /* UIView+roundCorners.swift */,
+				64DA2125235F424300934597 /* Blocks.swift */,
+				64DA2127235F424F00934597 /* BinaryFloatingPoint.swift */,
+				64DA2129235F425C00934597 /* Optional+Assert.swift */,
 				64B2B149235A919D00670627 /* VideoTrimView */,
 				0D0394662353051B005DCD16 /* Main.storyboard */,
 				0D0394692353051D005DCD16 /* Assets.xcassets */,
 				0D03946B2353051D005DCD16 /* LaunchScreen.storyboard */,
-				0D03946E2353051D005DCD16 /* Info.plist */,
 				0D57A8D32355CB1200611952 /* video.mp4 */,
+				0D03946E2353051D005DCD16 /* Info.plist */,
 			);
 			path = VideoEditControl;
 			sourceTree = "<group>";
@@ -159,8 +168,11 @@
 			files = (
 				0D0394652353051B005DCD16 /* ViewController.swift in Sources */,
 				0D57A8D22355C75100611952 /* VideoTrimView.swift in Sources */,
+				64DA2126235F424300934597 /* Blocks.swift in Sources */,
+				64DA2128235F424F00934597 /* BinaryFloatingPoint.swift in Sources */,
 				0D0394612353051B005DCD16 /* AppDelegate.swift in Sources */,
 				0D14A0C12356157E00BE342E /* UIView+roundCorners.swift in Sources */,
+				64DA212A235F425C00934597 /* Optional+Assert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
