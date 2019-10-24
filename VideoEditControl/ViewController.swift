@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         player?.play()
         
         trimView.videoAsset = asset
-        trimView.scrollOnField = true
+        trimView.panOnThumbnailsMovesCurrentPositionIndicator = true
         trimView.endInteracting = {
             self.updateValues()
             self.player?.play()

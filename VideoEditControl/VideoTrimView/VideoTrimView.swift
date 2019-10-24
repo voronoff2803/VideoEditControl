@@ -36,7 +36,7 @@ class VideoTrimView: UIView {
     
     var videoAsset: AVAsset?
     
-    var scrollOnField: Bool = false
+    var panOnThumbnailsMovesCurrentPositionIndicator: Bool = false
     
     var currentTimeDidChange: Block<Double>?
     var beginInteracting: VoidBlock?
@@ -48,7 +48,7 @@ class VideoTrimView: UIView {
         self.videoAsset = asset
         self.beginInteracting = beginInteracting
         self.endInteracting = endInteracting
-        self.scrollOnField = scrollOnField
+        self.panOnThumbnailsMovesCurrentPositionIndicator = scrollOnField
         super.init(frame: frame)
         loadThisViewFromNib()
     }
@@ -91,7 +91,7 @@ class VideoTrimView: UIView {
         leadingEdge.addGestureRecognizer(dragLeftPinGestureRecognizer)
         
         let dragPlayPinGesture = UIPanGestureRecognizer(target: self, action: #selector(dragPlayPin))
-        if scrollOnField { addGestureRecognizer(dragPlayPinGesture) }
+        if panOnThumbnailsMovesCurrentPositionIndicator { addGestureRecognizer(dragPlayPinGesture) }
         else { playPinView.addGestureRecognizer(dragPlayPinGesture) }
         
         guard let videoTrack = videoAsset?.tracks.first else { return }
