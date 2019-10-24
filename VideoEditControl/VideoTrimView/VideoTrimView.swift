@@ -12,6 +12,7 @@ import AVFoundation
 class VideoTrimView: UIView {
     
     @IBOutlet weak private var mainView: UIView!
+    @IBOutlet weak private var backgroundView: UIView!
     @IBOutlet weak private var leadingXConstraint: NSLayoutConstraint!
     @IBOutlet weak private var trailingConstraint: NSLayoutConstraint!
     @IBOutlet weak private var leadingEdge: UIView!
@@ -31,7 +32,6 @@ class VideoTrimView: UIView {
     
     var startValue: Double = 0.0
     var endValue: Double = 1.0
-    
     var minimumDurationValue: Float = 0.1
     
     var videoAsset: AVAsset?
@@ -82,6 +82,7 @@ class VideoTrimView: UIView {
         
         leadingEdge.roundCorners(corners: [.topLeft, .bottomLeft], radius: 7)
         trailingEdge.roundCorners(corners: [.topRight, .bottomRight], radius: 7)
+        backgroundView.layer.cornerRadius = 7
         
         let dragRightPinGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(dragRightPin))
         trailingEdge.addGestureRecognizer(dragRightPinGestureRecognizer)
@@ -104,8 +105,8 @@ class VideoTrimView: UIView {
     
     private func checkValues() {
         countValues()
-        if currentValue < startValue { currentTimeDidChange?(startValue + 0.001) }
-        else if currentValue > endValue { currentTimeDidChange?(startValue + 0.001) }
+        if currentValue < startValue { currentTimeDidChange?(startValue + 0.01) }
+        else if currentValue > endValue { currentTimeDidChange?(startValue + 0.01) }
     }
     
     private var startX: CGFloat = 0

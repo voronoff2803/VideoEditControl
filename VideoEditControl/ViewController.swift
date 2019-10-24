@@ -31,6 +31,15 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
         
         myPlayer.addPeriodicTimeObserver(forInterval: CMTime.init(value: 1, timescale: 60), queue: .main, using: { [weak self] _ in
             self?.trimView.currentValue =  myPlayer.normalizedPosition
+            if myPlayer.normalizedPosition == 1.0 {
+                myPlayer.seekWithZeroTolerance(toNormalizedPosition: self?.trimView.startValue ?? 0.0)
+                
+                // Если сразу вызвать Play() - то он не сработает
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                    myPlayer.play()
+                })
+            }
+            
         })
         
         let playerLayer = AVPlayerLayer(player: player)
