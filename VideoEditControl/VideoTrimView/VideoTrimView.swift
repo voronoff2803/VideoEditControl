@@ -12,6 +12,7 @@ import AVFoundation
 class VideoTrimView: UIView {
     
     @IBOutlet weak private var mainView: UIView!
+    @IBOutlet weak private var backgroundView: UIView!
     @IBOutlet weak private var leftConstraint: NSLayoutConstraint!
     @IBOutlet weak private var rightConstraint: NSLayoutConstraint!
     @IBOutlet weak private var leftPin: UIView!
@@ -31,7 +32,6 @@ class VideoTrimView: UIView {
     
     var startValue: Double = 0.0
     var endValue: Double = 1.0
-    
     var minimumDurationValue: Float = 0.1
     
     var videoAsset: AVAsset?
@@ -78,6 +78,8 @@ class VideoTrimView: UIView {
         playPinView.layer.shadowOpacity = 0.3
         thubnailsView.layer.masksToBounds = true
         
+        backgroundView.layer.cornerRadius = 7
+        
         leftPin.roundCorners(corners: [.topLeft, .bottomLeft], radius: 7)
         rightPin.roundCorners(corners: [.topRight, .bottomRight], radius: 7)
         
@@ -106,9 +108,9 @@ class VideoTrimView: UIView {
     private func checkValues() {
         countValues()
         if currentValue < startValue {
-            currentTimeDidChange?(startValue + 0.001)
+            currentTimeDidChange?(startValue + 0.01)
         } else if currentValue > endValue {
-            currentTimeDidChange?(startValue + 0.001)
+            currentTimeDidChange?(startValue + 0.01)
         }
     }
     

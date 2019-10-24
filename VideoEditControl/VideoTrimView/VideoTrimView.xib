@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoTrimView" customModule="VideoEditControl" customModuleProvider="target">
             <connections>
+                <outlet property="backgroundView" destination="X2I-xI-FDY" id="klo-UE-sQk"/>
                 <outlet property="leftConstraint" destination="zXF-FF-vAL" id="n01-Ce-0FN"/>
                 <outlet property="leftPin" destination="BjK-ou-8aw" id="bKe-Uy-BxM"/>
                 <outlet property="mainView" destination="iN0-l3-epB" id="Xfj-iI-B3a"/>
@@ -24,6 +25,10 @@
             <rect key="frame" x="0.0" y="0.0" width="529" height="102"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2I-xI-FDY">
+                    <rect key="frame" x="0.0" y="0.0" width="529" height="102"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2tB-bQ-h0w">
                     <rect key="frame" x="23" y="8" width="483" height="86"/>
                     <subviews>
@@ -100,15 +105,19 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="f6W-1u-0eK" secondAttribute="bottom" id="0IG-EI-fde"/>
                 <constraint firstItem="2tB-bQ-h0w" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="1Zi-rz-u2B"/>
+                <constraint firstAttribute="trailing" secondItem="X2I-xI-FDY" secondAttribute="trailing" id="3Od-PU-Ssb"/>
                 <constraint firstItem="2hk-8P-AXd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="23" id="97f-87-TFW"/>
                 <constraint firstItem="f6W-1u-0eK" firstAttribute="leading" secondItem="Kle-pQ-8yF" secondAttribute="trailing" id="AmH-Bd-fmh"/>
                 <constraint firstItem="BjK-ou-8aw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DQK-PQ-l1C"/>
+                <constraint firstAttribute="bottom" secondItem="X2I-xI-FDY" secondAttribute="bottom" id="FFg-ob-A0s"/>
                 <constraint firstAttribute="bottom" secondItem="2tB-bQ-h0w" secondAttribute="bottom" constant="8" id="Nqy-3o-cZW"/>
                 <constraint firstAttribute="trailing" secondItem="f6W-1u-0eK" secondAttribute="trailing" id="QXD-Zh-ZMS"/>
                 <constraint firstAttribute="bottom" secondItem="r7a-iz-ckE" secondAttribute="bottom" id="RFF-Al-laq"/>
                 <constraint firstAttribute="trailing" secondItem="2tB-bQ-h0w" secondAttribute="trailing" constant="23" id="VCU-Y0-61M"/>
                 <constraint firstAttribute="bottom" secondItem="2hk-8P-AXd" secondAttribute="bottom" constant="8" id="XSe-5r-emo"/>
                 <constraint firstItem="2hk-8P-AXd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="bRK-3t-HfM"/>
+                <constraint firstItem="X2I-xI-FDY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="gyq-XA-VuL"/>
+                <constraint firstItem="X2I-xI-FDY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="h0x-sI-n6F"/>
                 <constraint firstItem="2tB-bQ-h0w" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="23" id="kqY-yy-TaQ"/>
                 <constraint firstItem="r7a-iz-ckE" firstAttribute="leading" secondItem="BjK-ou-8aw" secondAttribute="trailing" id="lZv-Zy-x6k"/>
                 <constraint firstAttribute="bottom" secondItem="BjK-ou-8aw" secondAttribute="bottom" id="mxv-Mu-8cD"/>
