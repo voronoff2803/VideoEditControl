@@ -27,7 +27,7 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
         let asset = AVAsset(url: url)
         
         let myPlayer = AVPlayer(url: url)
-        self.player = myPlayer
+        player = myPlayer
         
         myPlayer.addPeriodicTimeObserver(forInterval: CMTime.init(value: 1, timescale: 60), queue: .main, using: { [weak self] _ in
             self?.trimView.currentValue =  myPlayer.normalizedPosition
@@ -49,31 +49,31 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
         }
         
         trimView.currentTimeDidChange = { currentValue in
-            self.player?.seekWithZeroTolerance(to: currentValue)
+            self.player?.seekWithZeroTolerance(toNormalizedPosition: currentValue)
         }
     }
     
     func updateValues() {
         label.text = "start = \(trimView.startValue)\n end = \(trimView.endValue)\n currnt = \(trimView.currentValue)"
         guard let duration = player?.currentItem?.duration else { return }
-        self.player?.seek(to: CMTime(seconds: duration.seconds * Double(self.trimView.currentValue), preferredTimescale: duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero)
+        player?.seek(to: CMTime(seconds: duration.seconds * Double(trimView.currentValue), preferredTimescale: duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero)
     }
 }
 
 extension AVPlayer {
     
-    func seekWithZeroTolerance(to normalizedPosition: Double) {
-        guard let duration = self.currentItem?.duration else { return }
-        self.seek(to: CMTime(seconds: duration.seconds * normalizedPosition, preferredTimescale: duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero)
+    func seekWithZeroTolerance(toNormalizedPosition normalizedPosition: Double) {
+        guard let duration = currentItem?.duration else { return }
+        seek(to: CMTime(seconds: duration.seconds * normalizedPosition, preferredTimescale: duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero)
     }
     
-    func seek(to normalizedPosition: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
-        guard let duration = self.currentItem?.duration else { return }
-        self.seek(to: CMTime(seconds: duration.seconds * normalizedPosition, preferredTimescale: duration.timescale), toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter)
+    func seek(toNormalizedPosition normalizedPosition: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
+        guard let duration = currentItem?.duration else { return }
+        seek(to: CMTime(seconds: duration.seconds * normalizedPosition, preferredTimescale: duration.timescale), toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter)
     }
     
     var normalizedPosition: Double {
-        guard let duration = self.currentItem?.duration.seconds, let time = self.currentItem?.currentTime().seconds else { return 0.0 }
+        guard let duration = currentItem?.duration.seconds, let time = currentItem?.currentTime().seconds else { return 0.0 }
         let progress = (time / duration)
         return progress
     }

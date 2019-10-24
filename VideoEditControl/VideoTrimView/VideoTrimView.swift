@@ -12,19 +12,19 @@ import AVFoundation
 class VideoTrimView: UIView {
     
     @IBOutlet weak private var mainView: UIView!
-    @IBOutlet weak private var leftConstraint: NSLayoutConstraint!
-    @IBOutlet weak private var rightConstraint: NSLayoutConstraint!
-    @IBOutlet weak private var leftPin: UIView!
-    @IBOutlet weak private var rightPin: UIView!
+    @IBOutlet weak private var leadingXConstraint: NSLayoutConstraint!
+    @IBOutlet weak private var trailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak private var leadingEdge: UIView!
+    @IBOutlet weak private var trailingEdge: UIView!
     @IBOutlet weak private var thubnailsView: UIView!
     @IBOutlet weak private var playPinView: UIView!
     @IBOutlet weak private var playPinConstraint: NSLayoutConstraint!
     
     var currentValue: Double {
-        get { ((playPinConstraint.constant - leftPin.bounds.width) / (thubnailsView.bounds.width - playPinView.bounds.width)).dbl }
+        get { playPinConstraint.constant.normalized(with: leadingEdge.bounds.width ... thubnailsView.bounds.width).dbl }
         set {
-            if userInteracting { return }
-            playPinConstraint.constant = newValue.cg * (thubnailsView.bounds.width - playPinView.bounds.width) + leftPin.bounds.width
+            guard userInteracting == false else { return }
+            playPinConstraint.constant = newValue.cg.deNormalized(with: playPinView.bounds.width ... leadingEdge.bounds.width)
             checkValues()
         }
     }
@@ -50,12 +50,12 @@ class VideoTrimView: UIView {
         self.endInteracting = endInteracting
         self.scrollOnField = scrollOnField
         super.init(frame: frame)
-        xibSetup()
+        loadThisViewFromNib()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        xibSetup()
+        loadThisViewFromNib()
     }
     
     override func layoutSubviews() {
@@ -64,10 +64,12 @@ class VideoTrimView: UIView {
         setup()
     }
     
-    private func xibSetup() {
+    private func loadThisViewFromNib() {
         Bundle.main.loadNibNamed("VideoTrimView", owner: self, options: nil)
         addSubview(mainView)
-        mainView.frame = self.bounds
+        mainView.frame = bounds
+        
+        // COMMENT: вот эта autoresizingMask тут действительно нужна?
         mainView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
@@ -78,62 +80,59 @@ class VideoTrimView: UIView {
         playPinView.layer.shadowOpacity = 0.3
         thubnailsView.layer.masksToBounds = true
         
-        leftPin.roundCorners(corners: [.topLeft, .bottomLeft], radius: 7)
-        rightPin.roundCorners(corners: [.topRight, .bottomRight], radius: 7)
+        leadingEdge.roundCorners(corners: [.topLeft, .bottomLeft], radius: 7)
+        trailingEdge.roundCorners(corners: [.topRight, .bottomRight], radius: 7)
         
         let dragRightPinGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(dragRightPin))
-        rightPin.addGestureRecognizer(dragRightPinGestureRecognizer)
+        trailingEdge.addGestureRecognizer(dragRightPinGestureRecognizer)
         
         let dragLeftPinGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(dragLeftPin))
-        leftPin.addGestureRecognizer(dragLeftPinGestureRecognizer)
+        leadingEdge.addGestureRecognizer(dragLeftPinGestureRecognizer)
         
         let dragPlayPinGesture = UIPanGestureRecognizer(target: self, action: #selector(dragPlayPin))
-        if scrollOnField {
-            self.addGestureRecognizer(dragPlayPinGesture)
-        } else {
-            playPinView.addGestureRecognizer(dragPlayPinGesture)
-        }
+        if scrollOnField { addGestureRecognizer(dragPlayPinGesture) }
+        else { playPinView.addGestureRecognizer(dragPlayPinGesture) }
         
         guard let videoTrack = videoAsset?.tracks.first else { return }
-        addThubnailViews(in: self.thubnailsView, track: videoTrack)
+        addThubnailViews(in: thubnailsView, track: videoTrack)
     }
     
     private func countValues() {
-        startValue = (leftConstraint.constant / (thubnailsView.bounds.width - playPinView.bounds.width)).dbl
-        endValue = (1 - rightConstraint.constant / (thubnailsView.bounds.width - playPinView.bounds.width)).dbl
+        startValue = (leadingXConstraint.constant / (thubnailsView.bounds.width - playPinView.bounds.width)).dbl
+        endValue = (1 - trailingConstraint.constant / (thubnailsView.bounds.width - playPinView.bounds.width)).dbl
     }
     
     private func checkValues() {
         countValues()
-        if currentValue < startValue {
-            currentTimeDidChange?(startValue + 0.001)
-        } else if currentValue > endValue {
-            currentTimeDidChange?(startValue + 0.001)
-        }
+        if currentValue < startValue { currentTimeDidChange?(startValue + 0.001) }
+        else if currentValue > endValue { currentTimeDidChange?(startValue + 0.001) }
     }
     
     private var startX: CGFloat = 0
     
     @objc private func dragPlayPin(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: self)
-        let tempValue = mainView.bounds.width - (playPinView.bounds.width + rightConstraint.constant + rightPin.bounds.width)
+        let tempValue = mainView.bounds.width - (playPinView.bounds.width + trailingConstraint.constant + trailingEdge.bounds.width)
         if gestureRecognizer.state == .began {
             startX = playPinConstraint.constant
             userInteracting = true
             beginInteracting?()
-        } else {
-            if leftConstraint.constant + leftPin.bounds.width > startX + translation.x {
-                playPinConstraint.constant = leftConstraint.constant + leftPin.bounds.width
-            } else if tempValue < startX + translation.x {
-                playPinConstraint.constant = mainView.bounds.width - (rightConstraint.constant + rightPin.bounds.width + playPinView.bounds.width)
-            } else {
+        }
+        else {
+            if leadingXConstraint.constant + leadingEdge.bounds.width > startX + translation.x {
+                playPinConstraint.constant = leadingXConstraint.constant + leadingEdge.bounds.width
+            }
+            else if tempValue < startX + translation.x {
+                playPinConstraint.constant = mainView.bounds.width - (trailingConstraint.constant + trailingEdge.bounds.width + playPinView.bounds.width)
+            }
+            else {
                 playPinConstraint.constant = startX + translation.x
             }
         }
         
         if gestureRecognizer.state == .ended {
-           userInteracting = false
-           endInteracting?()
+            userInteracting = false
+            endInteracting?()
         }
         
         currentTimeDidChange?(currentValue)
@@ -142,51 +141,54 @@ class VideoTrimView: UIView {
     @objc private func dragRightPin(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: self)
         let minDistance = thubnailsView.bounds.width * minimumDurationValue.cg
-        let tempValue = mainView.bounds.width - (leftConstraint.constant + rightPin.bounds.width + leftPin.bounds.width + playPinView.bounds.width + minDistance)
+        let tempValue = mainView.bounds.width - (leadingXConstraint.constant + trailingEdge.bounds.width + leadingEdge.bounds.width + playPinView.bounds.width + minDistance)
+        
         if  gestureRecognizer.state == .began {
-            startX = rightConstraint.constant
+            startX = trailingConstraint.constant
             userInteracting = true
             beginInteracting?()
-        } else {
-            if startX - translation.x > tempValue {
-                rightConstraint.constant = tempValue
-            } else if startX - translation.x < 0 {
-                rightConstraint.constant = 0
-            } else {
-                rightConstraint.constant = startX - translation.x
+        }
+        else {
+            if startX - translation.x > tempValue { trailingConstraint.constant = tempValue }
+            else if startX - translation.x < 0 { trailingConstraint.constant = 0 }
+            else {
+                trailingConstraint.constant = startX - translation.x
                 countValues()
                 currentTimeDidChange?(currentValue)
             }
         }
+        
         keepPlayPinInField()
+        
         if gestureRecognizer.state == .ended {
             countValues()
             userInteracting = false
             endInteracting?()
         }
-        
     }
     
     @objc private func dragLeftPin(_ gestureRecognizer: UIPanGestureRecognizer) {
         let translation = gestureRecognizer.translation(in: self)
         let minDistance = thubnailsView.bounds.width * minimumDurationValue.cg
-        let tempValue = mainView.bounds.width - (rightConstraint.constant + rightPin.bounds.width + leftPin.bounds.width + playPinView.bounds.width + minDistance)
+        let tempValue = mainView.bounds.width - (trailingConstraint.constant + trailingEdge.bounds.width + leadingEdge.bounds.width + playPinView.bounds.width + minDistance)
+        
         if  gestureRecognizer.state == .began {
-            startX = leftConstraint.constant
+            startX = leadingXConstraint.constant
             userInteracting = true
             beginInteracting?()
-        } else {
-            if startX + translation.x > tempValue {
-                leftConstraint.constant = tempValue
-            } else if startX + translation.x < 0 {
-                leftConstraint.constant = 0
-            } else {
+        }
+        else {
+            if startX + translation.x > tempValue { leadingXConstraint.constant = tempValue }
+            else if startX + translation.x < 0 { leadingXConstraint.constant = 0 }
+            else {
                 countValues()
                 currentTimeDidChange?(currentValue)
-                leftConstraint.constant = startX + translation.x
+                leadingXConstraint.constant = startX + translation.x
             }
         }
+        
         keepPlayPinInField()
+        
         if gestureRecognizer.state == .ended {
             countValues()
             userInteracting = false
@@ -195,10 +197,11 @@ class VideoTrimView: UIView {
     }
     
     private func keepPlayPinInField() {
-        if playPinConstraint.constant < leftPin.bounds.width + leftConstraint.constant {
-            playPinConstraint.constant = leftPin.bounds.width + leftConstraint.constant
-        } else if playPinConstraint.constant > mainView.bounds.width - (rightConstraint.constant + rightPin.bounds.width + playPinView.bounds.width) {
-            playPinConstraint.constant = mainView.bounds.width - (rightConstraint.constant + rightPin.bounds.width + playPinView.bounds.width)
+        if playPinConstraint.constant < leadingEdge.bounds.width + leadingXConstraint.constant {
+            playPinConstraint.constant = leadingEdge.bounds.width + leadingXConstraint.constant
+        }
+        else if playPinConstraint.constant > mainView.bounds.width - (trailingConstraint.constant + trailingEdge.bounds.width + playPinView.bounds.width) {
+            playPinConstraint.constant = mainView.bounds.width - (trailingConstraint.constant + trailingEdge.bounds.width + playPinView.bounds.width)
         }
     }
     
@@ -225,22 +228,18 @@ class VideoTrimView: UIView {
     }
     
     private func createThumbnailViews(in size: CGSize, track: AVAssetTrack) -> [UIImageView] {
+        guard let asset = track.asset.assertingNonNil else { return [] }
+        
         let count = getCountOfThubnails(in: size, track: track)
         let thubnailSize = getThubnailSize(in: size, track: track)
         
-        guard let asset = track.asset else { return [] }
-        let images = getImagesFromAsset(asset: asset, count: count)
-        
-        var thubnailViews: [UIImageView] = []
-        for i in 0..<count  {
+        return getImagesFromAsset(asset: asset, count: count).enumerated().map { (i, image) in
             let frame = CGRect(x: CGFloat(i) * thubnailSize.width, y: 0, width: thubnailSize.width, height: thubnailSize.height)
             let thubnailView = UIImageView(frame: frame)
-            thubnailView.image = images[i]
+            thubnailView.image = image
             thubnailView.layer.zPosition = -1
-            thubnailViews.append(thubnailView)
+            return thubnailView
         }
-        
-        return thubnailViews
     }
     
     private func getImagesFromAsset(asset: AVAsset, count: Int) -> [UIImage] {
@@ -251,7 +250,7 @@ class VideoTrimView: UIView {
         let thubnailDuration = trackDuration.seconds / Double(count)
         var images: [UIImage] = []
         
-        for i in 0..<count {
+        for i in 0 ..< count {
             do {
                 let image = try imageGenerator.copyCGImage(at: CMTime(seconds: thubnailDuration * Double(i), preferredTimescale: trackDuration.timescale), actualTime: nil)
                 images.append(UIImage(cgImage: image))

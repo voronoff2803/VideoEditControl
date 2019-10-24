@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14868"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15400"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoTrimView" customModule="VideoEditControl" customModuleProvider="target">
             <connections>
-                <outlet property="leftConstraint" destination="zXF-FF-vAL" id="n01-Ce-0FN"/>
-                <outlet property="leftPin" destination="BjK-ou-8aw" id="bKe-Uy-BxM"/>
+                <outlet property="leadingEdge" destination="BjK-ou-8aw" id="bKe-Uy-BxM"/>
+                <outlet property="leadingXConstraint" destination="zXF-FF-vAL" id="n01-Ce-0FN"/>
                 <outlet property="mainView" destination="iN0-l3-epB" id="Xfj-iI-B3a"/>
                 <outlet property="playPinConstraint" destination="97f-87-TFW" id="pD2-dq-tJI"/>
                 <outlet property="playPinView" destination="2hk-8P-AXd" id="qjb-pO-825"/>
-                <outlet property="rightConstraint" destination="QXD-Zh-ZMS" id="GXB-aZ-NFV"/>
-                <outlet property="rightPin" destination="f6W-1u-0eK" id="GGm-IS-tap"/>
                 <outlet property="thubnailsView" destination="2tB-bQ-h0w" id="wiK-YE-rg1"/>
+                <outlet property="trailingConstraint" destination="QXD-Zh-ZMS" id="GXB-aZ-NFV"/>
+                <outlet property="trailingEdge" destination="f6W-1u-0eK" id="GGm-IS-tap"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
