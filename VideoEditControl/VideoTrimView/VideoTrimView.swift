@@ -22,10 +22,13 @@ class VideoTrimView: UIView {
     @IBOutlet weak private var playPinConstraint: NSLayoutConstraint!
     
     var currentValue: Double {
-        get { playPinConstraint.constant.normalized(with: leadingEdge.bounds.width ... thubnailsView.bounds.width).dbl }
+        get {
+            return playPinConstraint.constant.normalized(with: leadingEdge.bounds.width ... (thubnailsView.bounds.width - playPinView.bounds.width) + leadingEdge.bounds.width).dbl
+            
+        }
         set {
             guard userInteracting == false else { return }
-            playPinConstraint.constant = newValue.cg.deNormalized(with: playPinView.bounds.width ... leadingEdge.bounds.width)
+            playPinConstraint.constant = newValue.cg.deNormalized(with: 0 ... (thubnailsView.bounds.width - playPinView.bounds.width)) + leadingEdge.bounds.width
             checkValues()
         }
     }

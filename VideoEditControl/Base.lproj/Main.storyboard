@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tkM-FH-UWC" customClass="VideoTrimView" customModule="VideoEditControl" customModuleProvider="target">
-                                <rect key="frame" x="20" y="782" width="374" height="60"/>
+                                <rect key="frame" x="20" y="547" width="374" height="60"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="ZQQ-od-yqg"/>
@@ -33,20 +33,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWv-zB-eDm">
-                                <rect key="frame" x="0.0" y="227" width="414" height="422"/>
+                                <rect key="frame" x="0.0" y="197" width="414" height="300"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="fdy-hR-Nkv"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rqQ-Km-01C" secondAttribute="trailing" constant="20" id="Eec-ZC-Lle"/>
                             <constraint firstItem="yWv-zB-eDm" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="HwD-Z8-LT7"/>
-                            <constraint firstItem="yWv-zB-eDm" firstAttribute="top" secondItem="rqQ-Km-01C" secondAttribute="bottom" constant="50" id="HwZ-3C-TeH"/>
-                            <constraint firstItem="tkM-FH-UWC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-20" id="Rni-cd-EyV"/>
+                            <constraint firstItem="yWv-zB-eDm" firstAttribute="top" secondItem="rqQ-Km-01C" secondAttribute="bottom" constant="20" id="HwZ-3C-TeH"/>
                             <constraint firstItem="rqQ-Km-01C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ZZS-W9-84r"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tkM-FH-UWC" secondAttribute="trailing" constant="20" id="aT3-dI-k2w"/>
                             <constraint firstItem="rqQ-Km-01C" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="33" id="mjZ-qb-5dI"/>
-                            <constraint firstItem="tkM-FH-UWC" firstAttribute="top" secondItem="yWv-zB-eDm" secondAttribute="bottom" constant="133" id="tN4-8A-WyH"/>
+                            <constraint firstItem="tkM-FH-UWC" firstAttribute="top" secondItem="yWv-zB-eDm" secondAttribute="bottom" constant="50" id="tN4-8A-WyH"/>
                             <constraint firstItem="tkM-FH-UWC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="th2-vA-OIY"/>
                             <constraint firstItem="yWv-zB-eDm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="u86-U9-WSv"/>
                         </constraints>
