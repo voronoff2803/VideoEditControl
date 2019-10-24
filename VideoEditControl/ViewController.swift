@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet weak var trimView: VideoTrimView!
     @IBOutlet weak var label: UILabel!
@@ -44,7 +44,7 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
         player?.play()
         
         trimView.videoAsset = asset
-        trimView.scrollOnField = true
+        trimView.panOnThumbnailsMovesCurrentPositionIndicator = true
         trimView.endInteracting = {
             self.updateValues()
             self.player?.play()
