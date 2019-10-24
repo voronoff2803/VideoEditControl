@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15400"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14868"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoTrimView" customModule="VideoEditControl" customModuleProvider="target">
             <connections>
+                <outlet property="backgroundView" destination="X2I-xI-FDY" id="klo-UE-sQk"/>
                 <outlet property="leadingEdge" destination="BjK-ou-8aw" id="bKe-Uy-BxM"/>
                 <outlet property="leadingXConstraint" destination="zXF-FF-vAL" id="n01-Ce-0FN"/>
-                <outlet property="backgroundView" destination="X2I-xI-FDY" id="klo-UE-sQk"/>
                 <outlet property="mainView" destination="iN0-l3-epB" id="Xfj-iI-B3a"/>
                 <outlet property="playPinConstraint" destination="97f-87-TFW" id="pD2-dq-tJI"/>
                 <outlet property="playPinView" destination="2hk-8P-AXd" id="qjb-pO-825"/>
@@ -29,7 +29,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="529" height="102"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2tB-bQ-h0w">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2tB-bQ-h0w" customClass="ThubnailsView" customModule="VideoEditControl" customModuleProvider="target">
                     <rect key="frame" x="23" y="8" width="483" height="86"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jsa-eL-i6R">
