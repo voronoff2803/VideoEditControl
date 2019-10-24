@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
+class ViewController: UIViewController {
     
     @IBOutlet weak var trimView: VideoTrimView!
     @IBOutlet weak var label: UILabel!
