@@ -20,9 +20,17 @@ class VideoTrimView: UIView {
     @IBOutlet weak private var playPinView: UIView!
     @IBOutlet weak private var playPinConstraint: NSLayoutConstraint!
     
-    var currentValue: Float = 0.0 { didSet { validateBoundaries() } }
-    var startValue: Float = 0.0
-    var endValue: Float = 1.0
+    var currentValue: Double {
+        get { ((playPinConstraint.constant - leftPin.bounds.width) / (thubnailsView.bounds.width - playPinView.bounds.width)).dbl }
+        set {
+            if userInteracting { return }
+            playPinConstraint.constant = newValue.cg * (thubnailsView.bounds.width - playPinView.bounds.width) + leftPin.bounds.width
+            checkValues()
+        }
+    }
+    
+    var startValue: Double = 0.0
+    var endValue: Double = 1.0
     
     var minimumDurationValue: Float = 0.1
     
@@ -30,7 +38,7 @@ class VideoTrimView: UIView {
     
     var scrollOnField: Bool = false
     
-    var currentTimeDidChange: Block<Float>?
+    var currentTimeDidChange: Block<Double>?
     var beginInteracting: VoidBlock?
     var endInteracting: VoidBlock?
     
@@ -63,12 +71,6 @@ class VideoTrimView: UIView {
         mainView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
-    private func validateBoundaries() {
-        guard (startValue ... endValue).contains(currentValue) == false else { return }
-        currentValue = minimumDurationValue
-        currentTimeDidChange?(currentValue)
-    }
-    
     private func setup() {
         playPinView.layer.cornerRadius = 5
         playPinView.layer.shadowColor = UIColor.black.cgColor
@@ -97,14 +99,17 @@ class VideoTrimView: UIView {
     }
     
     private func countValues() {
-        startValue = (leftConstraint.constant / (thubnailsView.bounds.width - playPinView.bounds.width)).flt
-        endValue = (1 - rightConstraint.constant / (thubnailsView.bounds.width - playPinView.bounds.width)).flt
-        currentValue = ((playPinConstraint.constant - leftPin.bounds.width) / (thubnailsView.bounds.width - playPinView.bounds.width)).flt
+        startValue = (leftConstraint.constant / (thubnailsView.bounds.width - playPinView.bounds.width)).dbl
+        endValue = (1 - rightConstraint.constant / (thubnailsView.bounds.width - playPinView.bounds.width)).dbl
     }
     
-    func setCurrentValue(_ value: CGFloat) {
-        if userInteracting { return }
-        playPinConstraint.constant = (value * (thubnailsView.bounds.width - playPinView.bounds.width)) + leftPin.bounds.width
+    private func checkValues() {
+        countValues()
+        if currentValue < startValue {
+            currentTimeDidChange?(startValue + 0.001)
+        } else if currentValue > endValue {
+            currentTimeDidChange?(startValue + 0.001)
+        }
     }
     
     private var startX: CGFloat = 0
@@ -127,10 +132,11 @@ class VideoTrimView: UIView {
         }
         
         if gestureRecognizer.state == .ended {
-           countValues()
            userInteracting = false
            endInteracting?()
         }
+        
+        currentTimeDidChange?(currentValue)
     }
     
     @objc private func dragRightPin(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -148,6 +154,8 @@ class VideoTrimView: UIView {
                 rightConstraint.constant = 0
             } else {
                 rightConstraint.constant = startX - translation.x
+                countValues()
+                currentTimeDidChange?(currentValue)
             }
         }
         keepPlayPinInField()
@@ -173,6 +181,8 @@ class VideoTrimView: UIView {
             } else if startX + translation.x < 0 {
                 leftConstraint.constant = 0
             } else {
+                countValues()
+                currentTimeDidChange?(currentValue)
                 leftConstraint.constant = startX + translation.x
             }
         }

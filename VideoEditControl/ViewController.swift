@@ -26,28 +26,11 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
         guard let url = Bundle.main.url(forResource: "video", withExtension: "mp4") else { return }
         let asset = AVAsset(url: url)
         
-
         let myPlayer = AVPlayer(url: url)
         self.player = myPlayer
         
-        myPlayer.addPeriodicTimeObserver(forInterval: CMTime.init(value: 1, timescale: 60), queue: .main, using: { [weak self] time in
-            guard self?.player.assertingNonNil?.rate != 0 else { return }
-            // ставить в контрол текущую позицию
-            
-            if let durationCM = myPlayer.currentItem?.duration {
-                let duration = CMTimeGetSeconds(durationCM), time = CMTimeGetSeconds(time)
-                
-                if time > duration * Float64(self.trimView.endValue) {
-                    self.player?.seek(to: CMTime(seconds: duration * Double(self.trimView.startValue), preferredTimescale: durationCM.timescale), toleranceBefore: .zero, toleranceAfter: .zero)
-                }
-                
-                if time < duration * Float64(self.trimView.startValue) - 0.1 {
-                    self.player?.seek(to: CMTime(seconds: duration * Double(self.trimView.startValue), preferredTimescale: durationCM.timescale), toleranceBefore: .zero, toleranceAfter: .zero)
-                }
-                
-                let progress = (time / duration)
-                self.trimView.setCurrentValue(CGFloat(progress))
-            }
+        myPlayer.addPeriodicTimeObserver(forInterval: CMTime.init(value: 1, timescale: 60), queue: .main, using: { [weak self] _ in
+            self?.trimView.currentValue =  myPlayer.normalizedPosition
         })
         
         let playerLayer = AVPlayerLayer(player: player)
@@ -65,9 +48,8 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
             self.player?.pause()
         }
         
-        trimView.currentTimeDidChange = { time in
-            let pos = (self.player?.currentItem?.duration.seconds).assertNonNilOrDefaultValue * time.dbl
-            self.player?.seek(to: CMTime(seconds: pos, preferredTimescale: self.player?.currentItem?.duration.timescale ?? 0), toleranceBefore: .zero, toleranceAfter: .zero)
+        trimView.currentTimeDidChange = { currentValue in
+            self.player?.seekWithZeroTolerance(to: currentValue)
         }
     }
     
@@ -81,12 +63,18 @@ class ViewController: UIViewController, AVPlayerItemOutputPushDelegate {
 extension AVPlayer {
     
     func seekWithZeroTolerance(to normalizedPosition: Double) {
-        
+        guard let duration = self.currentItem?.duration else { return }
+        self.seek(to: CMTime(seconds: duration.seconds * normalizedPosition, preferredTimescale: duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero)
     }
     
     func seek(to normalizedPosition: Double, toleranceBefore: CMTime, toleranceAfter: CMTime) {
-        
+        guard let duration = self.currentItem?.duration else { return }
+        self.seek(to: CMTime(seconds: duration.seconds * normalizedPosition, preferredTimescale: duration.timescale), toleranceBefore: toleranceBefore, toleranceAfter: toleranceAfter)
     }
     
-    var normalizedPosition: Double { currentTime() / d }
+    var normalizedPosition: Double {
+        guard let duration = self.currentItem?.duration.seconds, let time = self.currentItem?.currentTime().seconds else { return 0.0 }
+        let progress = (time / duration)
+        return progress
+    }
 }
