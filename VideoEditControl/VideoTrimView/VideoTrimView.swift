@@ -102,8 +102,8 @@ class VideoTrimView: UIView {
     }
     
     private func countValues() {
-        startValue = (leadingXConstraint.constant / (thubnailsView.bounds.width - playPinView.bounds.width)).dbl
-        endValue = (1 - trailingConstraint.constant / (thubnailsView.bounds.width - playPinView.bounds.width)).dbl
+        startValue = leadingXConstraint.constant.normalized(with: 0 ... (thubnailsView.bounds.width - playPinView.bounds.width)).dbl
+        endValue = 1 - trailingConstraint.constant.normalized(with: 0 ... (thubnailsView.bounds.width - playPinView.bounds.width)).dbl
     }
     
     private func checkValues() {
