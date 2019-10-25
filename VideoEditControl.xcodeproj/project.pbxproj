@@ -21,6 +21,7 @@
 		64DA2126235F424300934597 /* Blocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DA2125235F424300934597 /* Blocks.swift */; };
 		64DA2128235F424F00934597 /* BinaryFloatingPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DA2127235F424F00934597 /* BinaryFloatingPoint.swift */; };
 		64DA212A235F425C00934597 /* Optional+Assert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DA2129235F425C00934597 /* Optional+Assert.swift */; };
+		64EF4D032363BAF9005EA7E2 /* AVPlayer+NormalizedPositionAndNormalizedSeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF4D022363BAF9005EA7E2 /* AVPlayer+NormalizedPositionAndNormalizedSeek.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		64DA2125235F424300934597 /* Blocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blocks.swift; sourceTree = "<group>"; };
 		64DA2127235F424F00934597 /* BinaryFloatingPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryFloatingPoint.swift; sourceTree = "<group>"; };
 		64DA2129235F425C00934597 /* Optional+Assert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Assert.swift"; sourceTree = "<group>"; };
+		64EF4D022363BAF9005EA7E2 /* AVPlayer+NormalizedPositionAndNormalizedSeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayer+NormalizedPositionAndNormalizedSeek.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				0D0394602353051B005DCD16 /* AppDelegate.swift */,
 				0D0394642353051B005DCD16 /* ViewController.swift */,
 				0D14A0C02356157E00BE342E /* UIView+roundCorners.swift */,
+				64EF4D022363BAF9005EA7E2 /* AVPlayer+NormalizedPositionAndNormalizedSeek.swift */,
 				64DA2125235F424300934597 /* Blocks.swift */,
 				64DA2127235F424F00934597 /* BinaryFloatingPoint.swift */,
 				643C5DC42361F142006D86F4 /* BinaryFloatingPoint+NormalizedWithRange.swift */,
@@ -178,6 +181,7 @@
 				64DA2128235F424F00934597 /* BinaryFloatingPoint.swift in Sources */,
 				643C5DC52361F142006D86F4 /* BinaryFloatingPoint+NormalizedWithRange.swift in Sources */,
 				0D0394612353051B005DCD16 /* AppDelegate.swift in Sources */,
+				64EF4D032363BAF9005EA7E2 /* AVPlayer+NormalizedPositionAndNormalizedSeek.swift in Sources */,
 				0D14A0C12356157E00BE342E /* UIView+roundCorners.swift in Sources */,
 				0D6A9DAB236246F2001BF20C /* ThubnailsView.swift in Sources */,
 				64DA212A235F425C00934597 /* Optional+Assert.swift in Sources */,
