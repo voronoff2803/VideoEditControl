@@ -106,8 +106,9 @@ class VideoTrimView: UIView {
     
     private func checkValues() {
         countValues()
-        if currentValue < startValue { currentTimeDidChange?(startValue + 0.005) }
-        else if currentValue > endValue { currentTimeDidChange?(startValue + 0.005) }
+        let currentValueLagsBegindStartValueForMoreThenNegligibleAmount = startValue - currentValue > 0.002
+        if currentValueLagsBegindStartValueForMoreThenNegligibleAmount { currentTimeDidChange?(startValue) }
+        if currentValue >= endValue { currentTimeDidChange?(startValue) }
     }
     
     private var startX: CGFloat = 0

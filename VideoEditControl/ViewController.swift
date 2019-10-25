@@ -30,12 +30,12 @@ class ViewController: UIViewController {
         player = myPlayer
         
         myPlayer.addPeriodicTimeObserver(forInterval: CMTime.init(value: 1, timescale: 60), queue: .main, using: { [weak self] _ in
-            self?.trimView.currentValue = myPlayer.normalizedPosition
+            self?.trimView.currentValue = max(myPlayer.normalizedPosition, 0)
         })
         
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: player?.currentItem, queue: .main) { [weak self] _ in
-            self?.player?.seekWithZeroTolerance(toNormalizedPosition: .zero)
             self?.player?.play()
+            self?.player?.seekWithZeroTolerance(toNormalizedPosition: 0)
         }
         
         let playerLayer = AVPlayerLayer(player: player)
@@ -45,23 +45,22 @@ class ViewController: UIViewController {
         
         trimView.videoAsset = asset
         trimView.panOnThumbnailsMovesCurrentPositionIndicator = true
-        trimView.endInteracting = {
-            self.updateValues()
-            self.player?.play()
+        trimView.endInteracting = { [weak self] in
+            self?.updateValues()
+            self?.player?.play()
         }
-        trimView.beginInteracting = {
-            self.player?.pause()
+        trimView.beginInteracting = { [weak self] in
+            self?.player?.pause()
         }
         
-        trimView.currentTimeDidChange = { currentValue in
-            self.player?.seekWithZeroTolerance(toNormalizedPosition: currentValue)
+        trimView.currentTimeDidChange = { [weak self] currentValue in
+            self?.player?.seekWithZeroTolerance(toNormalizedPosition: currentValue)
         }
     }
     
     func updateValues() {
         label.text = "start = \(trimView.startValue)\n end = \(trimView.endValue)\n currnt = \(trimView.currentValue)"
-        guard let duration = player?.currentItem?.duration else { return }
-        player?.seek(to: CMTime(seconds: duration.seconds * Double(trimView.currentValue), preferredTimescale: duration.timescale), toleranceBefore: .zero, toleranceAfter: .zero)
+        player?.seek(toNormalizedPosition: trimView.currentValue.dbl, toleranceBefore: .zero, toleranceAfter: .zero)
     }
 }
 
