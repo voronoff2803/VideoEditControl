@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = .light }
     }
     
     func setup() {
