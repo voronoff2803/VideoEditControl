@@ -24,7 +24,6 @@ class VideoTrimView: UIView {
     var currentValue: Double {
         get {
             return playPinConstraint.constant.normalized(with: leadingEdge.bounds.width ... (thubnailsView.bounds.width - playPinView.bounds.width) + leadingEdge.bounds.width).dbl
-            
         }
         set {
             guard userInteracting == false else { return }

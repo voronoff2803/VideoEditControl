@@ -78,7 +78,7 @@ extension AVPlayer {
     }
     
     var normalizedPosition: Double {
-        guard let duration = currentItem?.duration.seconds, let time = currentItem?.currentTime().seconds else { return 0.0 }
+        guard currentItem?.status == .readyToPlay, let duration = currentItem?.duration.seconds, let time = currentItem?.currentTime().seconds else { return 0.0 }
         let progress = (time / duration)
         return progress
     }
